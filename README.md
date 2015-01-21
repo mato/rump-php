@@ -10,8 +10,11 @@ the Xen hypervisor, powered by rumprun-xen
 ## Trying it out
 
 To play with this, build rumprun-xen according to the instructions and add the
-`app-tools` directory to the *end* of your `$PATH`. You will also need to
-install `genisoimage`.
+`app-tools` directory to the *end* of your `$PATH`.
+
+You will also need to install:
+* `genisoimage`, to build the data images for the domUs.
+* `cmake`, used by Hiawatha Webserver to build.
 
 You will need a working Xen network set up, and two IP addresses for the demo.
 One will be used by the Xen domU running the HTTP server, the other by the domU
