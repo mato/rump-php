@@ -7,6 +7,8 @@ the Xen hypervisor, powered by rumprun-xen
 (http://repo.rumpkernel.org/rumprun-xen) and Rump Kernels
 (http://rumpkernel.org).
 
+*Full announcement on rumpkernel-users:* http://article.gmane.org/gmane.comp.rumpkernel.user/709
+
 ## Trying it out
 
 To play with this, build rumprun-xen according to the instructions and add the
