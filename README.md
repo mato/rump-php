@@ -3,7 +3,7 @@
 ## What is this?
 
 A demonstration of a httpd + FastCGI + PHP stack, running on Unikernels atop
-the Xen gypervisor, powered by rumprun-xen
+the Xen hypervisor, powered by rumprun-xen
 (http://repo.rumpkernel.org/rumprun-xen) and Rump Kernels
 (http://rumpkernel.org).
 
@@ -15,7 +15,7 @@ install `genisoimage`.
 
 You will need a working Xen network set up, and two IP addresses for the demo.
 One will be used by the Xen domU running the HTTP server, the other by the domU
-PHP serving FastCGI.
+running PHP serving FastCGI.
 
 1. Edit `run_hiawatha.sh` and `run_php.sh`, replacing the IP addresses used as
    appropriate.
