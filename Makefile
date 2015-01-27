@@ -31,7 +31,7 @@ build/hiawatha_cmake_stamp:
 php: build/php_extract_stamp build/php_patch_stamp build/php_configure_stamp
 	$(MAKE) -C build/php
 
-build/php_extract_stamp: deps/php-5.6.4.tar.bz2
+build/php_extract_stamp: deps/php-5.6.5.tar.bz2
 	mkdir -p build/php
 	tar -C build/php --strip=1 -xjf $<
 	touch $@
