@@ -1,31 +1,44 @@
-all: hiawatha php images
+all: nginx php images
 
-.PHONY: hiawatha
-hiawatha: build/hiawatha_extract_stamp build/hiawatha_patch_stamp \
-    build/hiawatha_cmake_stamp
-	$(MAKE) -C build/hiawatha/build
+.PHONY: nginx
+nginx: nginx/Makefile
+	$(MAKE) -C nginx
 
-build/hiawatha_extract_stamp: deps/hiawatha-9.11.tar.gz
-	mkdir -p build/hiawatha
-	tar -C build/hiawatha --strip=1 -xzf $<
-	touch $@
+NGINX_CONF_ENV += \
+	ngx_force_c_compiler=yes \
+	ngx_force_c99_have_variadic_macros=yes \
+	ngx_force_gcc_have_variadic_macros=yes \
+	ngx_force_gcc_have_atomic=yes \
+	ngx_force_have_libatomic=no \
+	ngx_force_sys_nerr=100 \
+	ngx_force_have_map_anon=yes \
+	ngx_force_have_map_devzero=no \
+	ngx_force_have_timer_event=yes \
+	ngx_force_have_posix_sem=yes
 
-build/hiawatha_patch_stamp: hiawatha.patch
-	patch -d build/hiawatha -p0 < $<
-	touch $@
+NGINX_CONF_OPTS += \
+	--crossbuild=NetBSD \
+	--with-cc=rumpapp-xen-cc \
+	--prefix=/none \
+	--conf-path=/data/conf/nginx.conf \
+	--sbin-path=/none \
+	--pid-path=/tmp/nginx.pid \
+	--lock-path=/tmp/nginx.lock \
+	--error-log-path=/tmp/error.log \
+	--http-log-path=/tmp/access.log \
+	--http-client-body-temp-path=/tmp/client-body \
+	--http-proxy-temp-path=/tmp/proxy \
+	--http-fastcgi-temp-path=/tmp/fastcgi \
+	--http-scgi-temp-path=/tmp/scgi \
+	--http-uwsgi-temp-path=/tmp/uwsgi \
+	--without-http_rewrite_module
 
-build/hiawatha_cmake_stamp:
-	mkdir -p build/hiawatha/build
-	( cd build/hiawatha/build; \
-	  cmake -DCMAKE_CROSSCOMPILING=1 \
-	        -DCMAKE_C_COMPILER=rumpapp-xen-cc \
-		-DCMAKE_SYSTEM_NAME=generic \
-		-DENABLE_XSLT=off \
-		-DENABLE_SSL=off \
-		.. \
-	)
-	echo "#define HAVE_UNSETENV 1" >> build/hiawatha/build/config.h
-	touch $@
+nginx/Makefile: nginx/src
+	(cd nginx; $(NGINX_CONF_ENV) ./configure $(NGINX_CONF_OPTS))
+
+nginx/src:
+	git submodule init
+	git submodule update
 
 .PHONY: php
 php: build/php_extract_stamp build/php_patch_stamp build/php_configure_stamp
@@ -47,10 +60,10 @@ build/php_configure_stamp:
 
 .PHONY: images
 images:
-# Both hiawatha and php appear to run happily without an /etc :)
-#	genisoimage -l -r -o images/stubetc.iso images/stubetc
+	genisoimage -l -r -o images/stubetc.iso images/stubetc
 	genisoimage -l -r -o images/data.iso images/data
 
 .PHONY: clean
 clean:
 	rm -rf build
+	$(MAKE) -C nginx clean
