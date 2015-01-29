@@ -2,12 +2,15 @@
 
 ## What is this?
 
-A demonstration of a httpd + FastCGI + PHP stack, running on Unikernels atop
+A demonstration of a Nginx + FastCGI + PHP stack, running on Unikernels atop
 the Xen hypervisor, powered by rumprun-xen
 (http://repo.rumpkernel.org/rumprun-xen) and Rump Kernels
 (http://rumpkernel.org).
 
 *Full announcement on rumpkernel-users:* http://thread.gmane.org/gmane.comp.rumpkernel.user/709
+
+Many thanks to Samuel Martin (@tSed) for developing patches to improve the
+cross-compilation support for Nginx.
 
 ## Trying it out
 
