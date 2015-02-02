@@ -28,7 +28,7 @@ running PHP serving FastCGI.
    appropriate.
 2. Edit `images/data/conf/nginx.conf` replacing the IP address in
    `fastcgi_pass` to match the IP you will use for the PHP domU.
-3. Run `rumpapp-xen-make`.
+3. Run `rumprun-xen-make`.
 4. As root on your Xen dom0, run `./run_nginx.sh` in one window and
    `./run_php.sh` in another.
 5. Browse to http://_hiawatha domU_/.

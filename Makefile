@@ -18,7 +18,7 @@ NGINX_CONF_ENV += \
 
 NGINX_CONF_OPTS += \
 	--crossbuild=NetBSD \
-	--with-cc=rumpapp-xen-cc \
+	--with-cc=rumprun-xen-cc \
 	--prefix=/none \
 	--conf-path=/data/conf/nginx.conf \
 	--sbin-path=/none \
@@ -53,7 +53,7 @@ build/php_patch_stamp:
 	touch $@
 
 build/php_configure_stamp:
-	( cd build/php; rumpapp-xen-configure \
+	( cd build/php; rumprun-xen-configure \
 	    ./configure --disable-shared --disable-all )
 	echo "#define HAVE_UTIME 1" >> build/php/main/php_config.h
 	touch $@
