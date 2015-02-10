@@ -55,7 +55,6 @@ build/php_patch_stamp: build/php_extract_stamp
 build/php_configure_stamp: build/php_patch_stamp
 	( cd build/php; rumprun-xen-configure \
 	    ./configure --disable-shared --disable-all )
-	echo "#define HAVE_UTIME 1" >> build/php/main/php_config.h
 	touch $@
 
 .PHONY: images
