@@ -2,20 +2,18 @@
 
 ## What is this?
 
-A demonstration of a Nginx + FastCGI + PHP stack, running on Unikernels atop
-the Xen hypervisor, powered by rumprun-xen
-(http://repo.rumpkernel.org/rumprun-xen) and Rump Kernels
-(http://rumpkernel.org).
-
-*Full announcement on rumpkernel-users:* http://thread.gmane.org/gmane.comp.rumpkernel.user/709
+A demonstration of a Nginx + FastCGI + PHP stack, running as Unikernels atop
+the Xen hypervisor, powered by [rumprun](http://repo.rumpkernel.org/rumprun)
+and [Rump Kernels](http://rumpkernel.org).
 
 Many thanks to Samuel Martin (@tSed) for developing patches to improve the
 cross-compilation support for Nginx.
 
 ## Trying it out
 
-To play with this, build rumprun-xen according to the instructions and add the
-`app-tools` directory to the *end* of your `$PATH`.
+To play with this, build rumprun for Xen according to the
+[instructions](http://wiki.rumpkernel.org/Repo%3A-rumprun#xen) and add the
+`app-tools` directory to your `$PATH`. 
 
 You will also need to install:
 * `genisoimage`, to build the data images for the domUs.
@@ -28,10 +26,10 @@ running PHP serving FastCGI.
    appropriate.
 2. Edit `images/data/conf/nginx.conf` replacing the IP address in
    `fastcgi_pass` to match the IP you will use for the PHP domU.
-3. Run `rumprun-xen-make`.
+3. Run `make` to build the Unikernels and data images.
 4. As root on your Xen dom0, run `./run_nginx.sh` in one window and
    `./run_php.sh` in another.
-5. Browse to http://_hiawatha domU_/.
+5. Browse to http://_nginx domU_/.
 
 Comments, questions, criticism welcome at the Rump Kernel mailing list or IRC:
 http://wiki.rumpkernel.org/Info:-Community
