@@ -1,8 +1,10 @@
 all: nginx php images
 
 .PHONY: nginx
-nginx: nginx/Makefile
-	$(MAKE) -C nginx
+nginx: nginx/objs/nginx
+
+nginx/objs/nginx: nginx/Makefile
+	$(MAKE) -C nginx CC=rumprun-xen-cc
 
 NGINX_CONF_ENV += \
 	ngx_force_c_compiler=yes \
@@ -41,8 +43,10 @@ nginx/src:
 	git submodule update
 
 .PHONY: php
-php: build/php_configure_stamp
-	$(MAKE) -C build/php
+php: build/php/sapi/cgi/php-cgi
+
+build/php/sapi/cgi/php-cgi: build/php_configure_stamp
+	$(MAKE) -C build/php CC=rumprun-xen-cc sapi/cgi/php-cgi
 
 build/php_extract_stamp: deps/php-5.6.5.tar.bz2
 	mkdir -p build/php
@@ -58,11 +62,16 @@ build/php_configure_stamp: build/php_patch_stamp
 	touch $@
 
 .PHONY: images
-images:
+images: images/stubetc.iso images/data.iso
+
+images/stubetc.iso: images/stubetc/*
 	genisoimage -l -r -o images/stubetc.iso images/stubetc
+
+images/data.iso: images/data/conf/* images/data/www/* images/data/www/static/*
 	genisoimage -l -r -o images/data.iso images/data
 
 .PHONY: clean
 clean:
 	rm -rf build
 	$(MAKE) -C nginx clean
+	rm -f images/stubetc.iso images/data.iso
