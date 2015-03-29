@@ -2,7 +2,7 @@
 
 ## What is this?
 
-A demonstration of a Nginx + FastCGI + PHP stack, running as Unikernels atop
+PHP packaging and infrastructure for running as Unikernels atop
 the Xen hypervisor, powered by [rumprun](http://repo.rumpkernel.org/rumprun)
 and [Rump Kernels](http://rumpkernel.org).
 
@@ -10,6 +10,8 @@ Many thanks to Samuel Martin (@tSed) for developing patches to improve the
 cross-compilation support for Nginx.
 
 ## Trying it out
+
+_TODO: Update instructions for the php/nginx repository split_
 
 To play with this, build rumprun for Xen according to the
 [instructions](http://wiki.rumpkernel.org/Repo%3A-rumprun#xen) and add the

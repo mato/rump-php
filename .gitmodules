@@ -1,4 +1,0 @@
-[submodule "nginx"]
-	path = nginx
-	url = git://github.com/mato/nginx
-	branch = wip-crossbuild
