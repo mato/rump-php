@@ -4,7 +4,7 @@ all: php images
 php: build/php/sapi/cgi/php-cgi
 
 build/php/sapi/cgi/php-cgi: build/php_configure_stamp
-	$(MAKE) -C build/php CC=rumprun-xen-cc sapi/cgi/php-cgi
+	$(MAKE) -C build/php sapi/cgi/php-cgi
 
 build/php_extract_stamp: deps/php-5.6.5.tar.bz2
 	mkdir -p build/php
