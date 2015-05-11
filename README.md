@@ -44,7 +44,7 @@ running PHP serving FastCGI.
    `fastcgi_pass` to match the IP you will use for the PHP domU.
 4. As root on your Xen dom0, run `./run_nginx.sh` in one window and
    `./run_php.sh` in another.
-5. Browse to http://<nginx_ip>/.
+5. Browse to `http://<nginx_ip>/`.
 
 Comments, questions, criticism welcome at the Rump Kernel mailing list or IRC:
 http://wiki.rumpkernel.org/Info:-Community
