@@ -27,6 +27,8 @@ make
 This will build PHP and data images, leaving the PHP unikernel binary
 in `bin/php-cgi`.
 
+## Running a nginx + PHP demo
+
 To run a full demo stack consisting of an nginx unikernel talking over FastCGI
 to a PHP unikernel:
 
