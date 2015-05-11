@@ -1,7 +1,8 @@
-all: php images
+all: bin/php-cgi images
 
-.PHONY: php
-php: build/php/sapi/cgi/php-cgi
+bin/php-cgi: build/php/sapi/cgi/php-cgi
+	mkdir -p bin
+	cp $< $@
 
 build/php/sapi/cgi/php-cgi: build/php_configure_stamp
 	$(MAKE) -C build/php sapi/cgi/php-cgi
@@ -30,5 +31,5 @@ images/data.iso: images/data/conf/* images/data/www/* images/data/www/static/*
 
 .PHONY: clean
 clean:
-	rm -rf build
+	rm -rf build bin
 	rm -f images/stubetc.iso images/data.iso
