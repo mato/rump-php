@@ -6,9 +6,6 @@ PHP packaging and infrastructure for running as Unikernels atop
 the Xen hypervisor, powered by [rumprun](http://repo.rumpkernel.org/rumprun)
 and [Rump Kernels](http://rumpkernel.org).
 
-Many thanks to Samuel Martin (@tSed) for developing patches to improve the
-cross-compilation support for Nginx.
-
 ## Trying it out
 
 To play with this, build rumprun for Xen according to the
